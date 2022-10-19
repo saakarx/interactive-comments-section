@@ -6,7 +6,9 @@ interface Props {
 }
 
 const Modal: React.FC<Props> = ({ children }) => {
-  const el: HTMLElement = document.getElementById('dialog') as HTMLElement;
+  const el: HTMLElement = document.getElementById(
+    'modal-container'
+  ) as HTMLElement;
 
   return createPortal(children, el);
 };

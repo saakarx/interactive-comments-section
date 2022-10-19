@@ -4,10 +4,10 @@ export type UserType = {
 };
 export type ReplyType = {
   id: number;
-  createdAt: string;
   content: string;
-  replyingTo: string;
+  createdAt: string;
   score: number;
+  replyingTo: string;
   user: UserType;
 };
 export type CommentType = {

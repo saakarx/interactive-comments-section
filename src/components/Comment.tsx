@@ -2,15 +2,15 @@ import React from 'react';
 
 import { ReplyType, UserType } from '../types.type';
 import CommentButton from './CommentButton';
-import ScoreButton from './ScoreButtons';
+import Reply from './Reply';
+import ScoreButtons from './ScoreButtons';
 
 interface Props {
   user: UserType;
   content: string;
   createdAt: string;
   id: number;
-  replies?: ReplyType[];
-  replyingTo?: string;
+  replies: ReplyType[];
   score: number;
 }
 
@@ -19,11 +19,10 @@ const Comment: React.FC<Props> = ({
   user,
   createdAt,
   replies,
-  score,
-  replyingTo
+  score
 }) => {
   return (
-    <>
+    <div className="flex flex-col gap-4">
       <article className="bg-white p-4 md:p-6 rounded-lg grid grid-cols-comment-mobile md:grid-cols-comment-desktop grid-rows-comment-mobile md:grid-rows-comment-desktop gap-4">
         <div className="flex gap-4 items-center flex-wrap col-start-1 col-span-2 md:col-span-1 md:col-start-2 row-start-1">
           <img className="w-8 h-8" src={user.image.webp} alt="" />
@@ -36,12 +35,9 @@ const Comment: React.FC<Props> = ({
           <p>{createdAt}</p>
         </div>
         <p className="col-start-1 md:col-start-2 row-start-2 col-span-2">
-          {replyingTo && (
-            <span className="text-blue-moderate font-bold">@{replyingTo}</span>
-          )}
           {content}
         </p>
-        <ScoreButton score={score} />
+        <ScoreButtons score={score} />
         <div className="flex items-start justify-end flex-wrap gap-4 col-start-2 row-start-3 md:col-start-3 md:row-start-1">
           <CommentButton text="Delete" red={true}>
             <svg
@@ -77,12 +73,12 @@ const Comment: React.FC<Props> = ({
       </article>
       {replies && replies.length > 0 && (
         <div className="flex flex-col gap-4 border-l-gray-light border-l-2 pl-4 md:pl-6 md:ml-6">
-          {replies?.map(reply => (
-            <Comment key={reply.id} {...reply} />
+          {replies.map(reply => (
+            <Reply key={reply.id} {...reply} />
           ))}
         </div>
       )}
-    </>
+    </div>
   );
 };
 export default Comment;
