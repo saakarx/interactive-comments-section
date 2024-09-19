@@ -13,7 +13,7 @@ const Button: React.FC<Props> = ({
   width,
   bg,
   className,
-  handleClick
+  handleClick,
 }) => {
   return (
     <button
